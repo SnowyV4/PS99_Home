@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Snowy Scripts</title>
+        <meta name="description" content="Home of the code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css"></link>
+    </head>
+    <body>
+        <pre id="script"></pre>
+        <script>
+            async function loadScript() {
+                try {
+                    const response = await fetch('data/code.txt')
+                    if(!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    const text = await response.text();
+                    document.getElementById('script').textContent = text;
+                } catch(error) {
+                console.error('Error loading the text file:', error);
+                document.getElementById('file-content').textContent = 'Error loading the text file.';
+                }
+            } 
 
+            window.onload = loadScript;
+        </script>
+    </body>
+</html>
